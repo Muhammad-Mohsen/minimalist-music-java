@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:padding="5dp"
+	android:gravity="center"
+	android:focusable="true"
+	android:clickable="true"
+	android:background="@drawable/style_ripple_dark"
+	android:elevation="3dp"
+	>
+
+	<!--icon-->
+	<ImageView
+		android:id="@+id/imageViewIcon"
+		android:layout_width="40dp"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="5dp"
+		android:contentDescription="@string/recyclerItemTypeTrack"
+		android:src="@mipmap/ic_directory"
+		/>
+
+	<!--track name, album, artist-->
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical"
+		>
+
+		<TextView
+			android:id="@+id/textViewDirectoryName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:maxLines="1"
+			android:ellipsize="end"
+			android:textSize="@dimen/textLarge"
+			android:textColor="@color/colorTextPrimary"
+			tools:text="Folder Name"
+			/>
+
+		<TextView
+			android:id="@+id/textViewMediaFileCount"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="@dimen/textSmall"
+			android:textColor="@color/colorTextPrimaryDark"
+			tools:text="16 Music Files"
+			/>
+
+	</LinearLayout>
+
+</LinearLayout>

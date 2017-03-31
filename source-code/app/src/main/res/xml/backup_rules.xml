@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+	<!-- custom XML rules to control what gets backed up between app installs -->
+	<!-- https://developer.android.com/guide/topics/data/autobackup.html -->
+	<include domain="sharedpref" path="."/>
+</full-backup-content>

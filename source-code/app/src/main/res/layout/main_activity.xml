@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fitsSystemWindows="true"
+	tools:context="mohsen.muhammad.minimalistmusicplayer.MainActivity"
+	android:orientation="vertical"
+	>
+
+	<!--tool bar is in the fragment. BindView doesn't like it when the view isn't in the root's tree, nor should it-->
+
+	<fragment
+		android:id="@+id/fragmentMain"
+		android:name="mohsen.muhammad.minimalistmusicplayer.MainActivityFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		tools:layout="@layout/main_fragment"/>
+
+</LinearLayout>
