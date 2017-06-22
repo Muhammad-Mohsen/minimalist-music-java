@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
-import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerLayoutManager;
+import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerManager;
 import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerRecyclerViewAdapter;
 import mohsen.muhammad.minimalistmusicplayer.util.FileHelper;
 import mohsen.muhammad.minimalistmusicplayer.util.Util;
@@ -43,7 +43,7 @@ public class MetadataAsyncTask extends AsyncTask<ArrayList<FileModel>, Void, Arr
 		if (fileModels != null && fileModels.size() > 0)
 			isOnCurrentDirectory = Util.getCurrentDirectory().getAbsolutePath().equals(fileModels.get(0).getParentFile().getAbsolutePath());
 
-		ExplorerRecyclerViewAdapter adapter = ExplorerLayoutManager.getExplorerAdapter();
+		ExplorerRecyclerViewAdapter adapter = ExplorerManager.getExplorerAdapter();
 		if (adapter != null && isOnCurrentDirectory)
 			adapter.notifyItemRangeChanged(0, fileModels.size());
 	}

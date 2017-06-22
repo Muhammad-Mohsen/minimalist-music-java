@@ -8,14 +8,13 @@ import java.io.File;
 import java.util.HashMap;
 
 import mohsen.muhammad.minimalistmusicplayer.files.FileCache;
-import mohsen.muhammad.minimalistmusicplayer.util.Util;
 
 /**
  * Created by muhammad.mohsen on 6/13/2017.
  * controls layout properties (e.g. scroll position for each directory, display of permission request layout)
  * for the explorer view
  */
-public class ExplorerLayoutManager {
+public class ExplorerManager {
 
 	private static RecyclerView sRecyclerViewExplorer;
 	private static LinearLayout sLinearLayoutPermission;
@@ -28,15 +27,12 @@ public class ExplorerLayoutManager {
 		sLinearLayoutPermission = linearLayoutPermission;
 		sLinearLayoutEmptyDir = linearLayoutEmptyDir;
 
-		// store the scroll position
+		// doesn't do anything right now.
+		// scrolling has a noticeable performance hit
 		sRecyclerViewExplorer.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 				super.onScrolled(recyclerView, dx, dy);
-
-				String dir = Util.getCurrentDirectory().getName();
-				int originalScrollPosition = getScrollPosition(dir);
-				setScrollPosition(dir, originalScrollPosition + dy);
 			}
 		});
 	}
@@ -48,36 +44,14 @@ public class ExplorerLayoutManager {
 		sLinearLayoutEmptyDir = null;
 	}
 
-	public static RecyclerView getRecyclerViewExplorer() {
-		return sRecyclerViewExplorer;
-	}
-	public static ExplorerRecyclerViewAdapter getExplorerAdapter() {
-		if (sRecyclerViewExplorer != null)
-			return (ExplorerRecyclerViewAdapter) sRecyclerViewExplorer.getAdapter();
+	public static void update(File dir) {
+		// if the class is not initialized, return.
+		if (sRecyclerViewExplorer == null)
+			return;
 
-		return null;
-	}
-	private static RecyclerView.LayoutManager getExplorerRecyclerLayoutManager() {
-		if (sRecyclerViewExplorer != null)
-			return sRecyclerViewExplorer.getLayoutManager();
-
-		return null;
-	}
-
-	public static void scrollToCachedPosition(String dir) {
-		RecyclerView.LayoutManager layoutManager = getExplorerRecyclerLayoutManager();
-
-		if (layoutManager != null)
-			layoutManager.scrollToPosition(getScrollPosition(dir));
-	}
-	private static void setScrollPosition(String dir, int scrollPosition) {
-		sScrollPositionCache.put(dir, scrollPosition);
-	}
-	private static int getScrollPosition(String dir) {
-		if (sScrollPositionCache.containsKey(dir))
-			return sScrollPositionCache.get(dir);
-
-		return 0;
+		ExplorerRecyclerViewAdapter adapter = getExplorerAdapter();
+		if (adapter != null)
+			adapter.update(FileCache.getPathFileModels(dir));
 	}
 
 	public static void showHidePermissionLayout(boolean show) {
@@ -91,9 +65,23 @@ public class ExplorerLayoutManager {
 
 	}
 
-	public static void update(File dir) {
-		ExplorerRecyclerViewAdapter adapter = getExplorerAdapter();
-		if (adapter != null)
-			adapter.update(FileCache.getPathFileModels(dir));
+	public static ExplorerRecyclerViewAdapter getExplorerAdapter() {
+		if (sRecyclerViewExplorer != null)
+			return (ExplorerRecyclerViewAdapter) sRecyclerViewExplorer.getAdapter();
+
+		return null;
+	}
+
+	public static void scrollToCachedPosition(String dir) {
+		sRecyclerViewExplorer.scrollToPosition(getScrollPosition(dir));
+	}
+	private static void setScrollPosition(String dir, int scrollPosition) {
+		sScrollPositionCache.put(dir, scrollPosition);
+	}
+	private static int getScrollPosition(String dir) {
+		if (sScrollPositionCache.containsKey(dir))
+			return sScrollPositionCache.get(dir);
+
+		return 0;
 	}
 }

@@ -20,8 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import mohsen.muhammad.minimalistmusicplayer.breadcrumb.BreadcrumbBarRecyclerAdapter;
-import mohsen.muhammad.minimalistmusicplayer.breadcrumb.BreadcrumbLayoutManager;
-import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerLayoutManager;
+import mohsen.muhammad.minimalistmusicplayer.breadcrumb.BreadcrumbManager;
+import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerManager;
 import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerRecyclerViewAdapter;
 import mohsen.muhammad.minimalistmusicplayer.files.FileCache;
 import mohsen.muhammad.minimalistmusicplayer.util.FileHelper;
@@ -77,19 +77,17 @@ public class MainActivityFragment extends Fragment {
 
 			BreadcrumbBarRecyclerAdapter breadcrumbAdapter = new BreadcrumbBarRecyclerAdapter(currentDirectory);
 			mRecyclerViewBreadcrumbs.setAdapter(breadcrumbAdapter);
-			BreadcrumbLayoutManager.initialize(mRecyclerViewBreadcrumbs, mImageButtonBack);
+			BreadcrumbManager.initialize(mRecyclerViewBreadcrumbs, mImageButtonBack, currentDirectory);
 
 			ExplorerRecyclerViewAdapter explorerAdapter = new ExplorerRecyclerViewAdapter(FileCache.getPathFileModels(currentDirectory));
 			mRecyclerViewExplorer.setAdapter(explorerAdapter);
 			mRecyclerViewExplorer.setItemAnimator(new SlideInLeftAnimator());
 
-			ExplorerLayoutManager.initialize(mRecyclerViewExplorer, mLayoutPermission, null);
-			ExplorerLayoutManager.scrollToCachedPosition(currentDirectory.getName());
-
-			ExplorerLayoutManager.showHidePermissionLayout(false);
+			ExplorerManager.initialize(mRecyclerViewExplorer, mLayoutPermission, null);
+			ExplorerManager.showHidePermissionLayout(false);
 
 		} else {
-			ExplorerLayoutManager.showHidePermissionLayout(true);
+			ExplorerManager.showHidePermissionLayout(true);
 		}
 	}
 
@@ -103,8 +101,8 @@ public class MainActivityFragment extends Fragment {
 	@Override
 	public void onStop() {
 		super.onStop();
-		BreadcrumbLayoutManager.terminate();
-		ExplorerLayoutManager.terminate();
+		BreadcrumbManager.terminate();
+		ExplorerManager.terminate();
 
 		// TODO do it better
 		Util.saveCurrentDirectory(getContext(), Util.getCurrentDirectory());
@@ -126,8 +124,8 @@ public class MainActivityFragment extends Fragment {
 
 				// repopulate the recycler views
 				// the null checks are useless, but they'll never hurt!
-				ExplorerLayoutManager.update(Util.getCurrentDirectory());
-				BreadcrumbLayoutManager.update(Util.getCurrentDirectory());
+				ExplorerManager.update(Util.getCurrentDirectory());
+				BreadcrumbManager.update(Util.getCurrentDirectory());
 			}
 		});
 

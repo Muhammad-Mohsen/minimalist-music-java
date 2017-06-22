@@ -10,7 +10,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mohsen.muhammad.minimalistmusicplayer.R;
-import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerLayoutManager;
+import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerManager;
 import mohsen.muhammad.minimalistmusicplayer.util.Util;
 
 /**
@@ -54,8 +54,8 @@ class CrumbViewHolder extends RecyclerView.ViewHolder {
 			Util.setCurrentDirectory(mFile);
 
 			// repopulate the recycler views
-			ExplorerLayoutManager.update(mFile);
-			BreadcrumbLayoutManager.update(mFile);
+			ExplorerManager.update(mFile);
+			BreadcrumbManager.update(mFile);
 		}
 	}
 }

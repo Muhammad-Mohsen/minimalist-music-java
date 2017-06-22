@@ -11,7 +11,6 @@ import mohsen.muhammad.minimalistmusicplayer.explorer.holders.DirectoryViewHolde
 import mohsen.muhammad.minimalistmusicplayer.explorer.holders.ExplorerViewHolder;
 import mohsen.muhammad.minimalistmusicplayer.explorer.holders.TrackViewHolder;
 import mohsen.muhammad.minimalistmusicplayer.files.FileModel;
-import mohsen.muhammad.minimalistmusicplayer.util.Util;
 import mohsen.muhammad.minimalistmusicplayer.util.enums.ExplorerViewType;
 
 /**
@@ -72,7 +71,5 @@ public class ExplorerRecyclerViewAdapter extends RecyclerView.Adapter<ExplorerVi
 			mFileModels.add(file);
 
 		notifyItemRangeInserted(0, mFileModels.size());
-
-		ExplorerLayoutManager.scrollToCachedPosition(Util.getCurrentDirectory().getName());
 	}
 }

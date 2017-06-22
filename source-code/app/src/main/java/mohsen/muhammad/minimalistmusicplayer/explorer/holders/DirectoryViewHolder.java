@@ -9,8 +9,8 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mohsen.muhammad.minimalistmusicplayer.R;
-import mohsen.muhammad.minimalistmusicplayer.breadcrumb.BreadcrumbLayoutManager;
-import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerLayoutManager;
+import mohsen.muhammad.minimalistmusicplayer.breadcrumb.BreadcrumbManager;
+import mohsen.muhammad.minimalistmusicplayer.explorer.ExplorerManager;
 import mohsen.muhammad.minimalistmusicplayer.files.FileModel;
 import mohsen.muhammad.minimalistmusicplayer.util.Util;
 
@@ -60,8 +60,8 @@ public class DirectoryViewHolder extends ExplorerViewHolder {
 			Util.setCurrentDirectory(f);
 
 			// repopulate the recycler views
-			ExplorerLayoutManager.update(f);
-			BreadcrumbLayoutManager.update(f);
+			ExplorerManager.update(f);
+			BreadcrumbManager.update(f);
 		}
 	}
 }
