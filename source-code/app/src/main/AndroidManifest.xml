@@ -14,10 +14,11 @@
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning"> <!-- we're ignoring the app-not-indexable warning -->
 
+		<!-- Splash theme is applied at the start, MainActivity changes theme in onCreate -->
 		<activity
 			android:name=".MainActivity"
 			android:label="@string/appName"
-			android:theme="@style/AppTheme.NoActionBar">
+			android:theme="@style/SplashTheme">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
