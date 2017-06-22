@@ -8,7 +8,7 @@
 	android:orientation="horizontal"
 	android:focusable="true"
 	android:clickable="true"
-	android:background="@drawable/style_ripple_light"
+	android:background="@drawable/style_ripple_dark"
 	android:gravity="center"
 	>
 
