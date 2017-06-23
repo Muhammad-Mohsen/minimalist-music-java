@@ -18,12 +18,12 @@ import mohsen.muhammad.minimalistmusicplayer.util.FileHelper;
  */
 public class BreadcrumbManager {
 
-	private static RecyclerView sRecyclerViewBreadcrumb;
+	private static RecyclerView sRecyclerViewBreadcrumbs;
 	private static ImageButton sImageButtonBack;
 
-	public static void initialize(RecyclerView breadcrumb, ImageButton back, File currentDirectory) {
+	public static void initialize(RecyclerView breadcrumbs, ImageButton back, File currentDirectory) {
 		// initialize references
-		sRecyclerViewBreadcrumb = breadcrumb;
+		sRecyclerViewBreadcrumbs = breadcrumbs;
 		sImageButtonBack = back;
 
 		// set back button icon.
@@ -45,35 +45,38 @@ public class BreadcrumbManager {
 		// because the animation is not started,
 		// the tag should be the opposite of the animation drawable being set on the button
 		sImageButtonBack.setTag(tag);
+
+		// scroll to end
+		sRecyclerViewBreadcrumbs.scrollToPosition(currentDirectory.getAbsolutePath().split("/").length - 2);
 	}
 	public static void terminate() {
-		sRecyclerViewBreadcrumb = null;
+		sRecyclerViewBreadcrumbs = null;
 		sImageButtonBack = null;
 	}
 
 	public static void update(File currentDirectory) {
 		// if the class is not initialized, return
-		if (sRecyclerViewBreadcrumb == null)
+		if (sRecyclerViewBreadcrumbs == null)
 			return;
 
 		BreadcrumbBarRecyclerAdapter breadcrumbAdapter = BreadcrumbManager.getBreadcrumbAdapter();
 		if (breadcrumbAdapter != null)
 			breadcrumbAdapter.update(currentDirectory);
 
-		sRecyclerViewBreadcrumb.scrollToPosition(currentDirectory.getAbsolutePath().split("/").length - 2);
+		sRecyclerViewBreadcrumbs.scrollToPosition(currentDirectory.getAbsolutePath().split("/").length - 2);
 
 		// if currently at the root, animate to the root icon
 		if (currentDirectory.getAbsolutePath().equals(FileHelper.ROOT))
 			animateBackButton(false);
 
-			// if not at the root AND not displaying the back icon, animate to it
+		// if not at the root AND not displaying the back icon, animate to it
 		else if (!currentDirectory.getAbsolutePath().equals(FileHelper.ROOT) && (int)sImageButtonBack.getTag() != R.drawable.anim_root_back)
 			animateBackButton(true);
 	}
 
 	private static BreadcrumbBarRecyclerAdapter getBreadcrumbAdapter() {
-		if (sRecyclerViewBreadcrumb != null)
-			return (BreadcrumbBarRecyclerAdapter) sRecyclerViewBreadcrumb.getAdapter();
+		if (sRecyclerViewBreadcrumbs != null)
+			return (BreadcrumbBarRecyclerAdapter) sRecyclerViewBreadcrumbs.getAdapter();
 
 		return null;
 	}
