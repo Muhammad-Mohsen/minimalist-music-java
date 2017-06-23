@@ -68,6 +68,8 @@
 			android:layout_height="0dp"
 			android:layout_weight="1"
 			app:layoutManager="LinearLayoutManager"
+			android:scrollbars="vertical"
+			style="@style/scrollbar_style"
 			tools:listitem="@layout/track_list_item"
 			/>
 

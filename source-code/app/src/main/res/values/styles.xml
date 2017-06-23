@@ -27,4 +27,16 @@
 
 	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+	<!-- Scrollbar style for the explorer recycler view -->
+	<style name="scrollbar_style">
+		<item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+		<item name="android:scrollbarStyle">outsideOverlay</item>
+		<item name="android:scrollbars">vertical</item>
+		<item name="android:fadeScrollbars">true</item>
+		<item name="android:scrollbarThumbVertical">@drawable/style_scrollbar_thumb</item>
+		<item name="android:scrollbarSize">3dp</item>
+		<item name="android:scrollbarFadeDuration">800</item>
+		<item name="android:scrollbarDefaultDelayBeforeFade">500</item>
+	</style>
+
 </resources>
