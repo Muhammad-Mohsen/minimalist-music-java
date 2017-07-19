@@ -34,4 +34,13 @@ public class ExplorerViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void setClickListeners() {}
+
+	/**
+	 * defines the explorer recycler view adapter view types
+	 */
+	public enum Type {
+		DIRECTORY,
+		TRACK
+	}
+
 }
