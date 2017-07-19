@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mohsen.muhammad.minimalistmusicplayer.R;
 import mohsen.muhammad.minimalistmusicplayer.explorer.holders.DirectoryViewHolder;
 import mohsen.muhammad.minimalistmusicplayer.explorer.holders.ExplorerViewHolder;
 import mohsen.muhammad.minimalistmusicplayer.explorer.holders.TrackViewHolder;
 import mohsen.muhammad.minimalistmusicplayer.files.FileModel;
-import mohsen.muhammad.minimalistmusicplayer.util.enums.ExplorerViewType;
 
 /**
  * Created by muhammad.mohsen on 12/10/2016.
@@ -30,9 +30,9 @@ public class ExplorerRecyclerViewAdapter extends RecyclerView.Adapter<ExplorerVi
 	@Override
 	public int getItemViewType(int position) {
 		if (mFileModels.get(position).isDirectory())
-			return ExplorerViewType.DIRECTORY.ordinal();
+			return ExplorerViewHolder.Type.DIRECTORY.ordinal();
 		else
-			return ExplorerViewType.TRACK.ordinal();
+			return ExplorerViewHolder.Type.TRACK.ordinal();
 	}
 
 	// returns the proper ViewHolder class
@@ -40,10 +40,10 @@ public class ExplorerRecyclerViewAdapter extends RecyclerView.Adapter<ExplorerVi
 	public ExplorerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-		if (viewType == ExplorerViewType.DIRECTORY.ordinal())
+		if (viewType == ExplorerViewHolder.Type.DIRECTORY.ordinal())
 			return new DirectoryViewHolder(inflater.inflate(R.layout.directory_list_item, parent, false));
 
-		else if (viewType == ExplorerViewType.TRACK.ordinal())
+		else if (viewType == ExplorerViewHolder.Type.TRACK.ordinal())
 			return new TrackViewHolder(inflater.inflate(R.layout.track_list_item, parent, false));
 
 		return null;
@@ -71,5 +71,20 @@ public class ExplorerRecyclerViewAdapter extends RecyclerView.Adapter<ExplorerVi
 			mFileModels.add(file);
 
 		notifyItemRangeInserted(0, mFileModels.size());
+	}
+
+	void updateCurrentTrack(int newPosition, int oldPosition) {
+		if (oldPosition != -1)
+			notifyItemChanged(oldPosition);
+
+		notifyItemChanged(newPosition);
+	}
+
+	void updatePlaylist(List<Integer> newPositionList, List<Integer> oldPositionList) {
+		for (int position : oldPositionList)
+			notifyItemChanged(position);
+
+		for (int position : newPositionList)
+			notifyItemChanged(position);
 	}
 }
