@@ -54,8 +54,8 @@ class CrumbViewHolder extends RecyclerView.ViewHolder {
 			Util.setCurrentDirectory(mFile);
 
 			// repopulate the recycler views
-			ExplorerManager.update(mFile);
-			BreadcrumbManager.update(mFile);
+			ExplorerManager.onDirectoryChange(mFile);
+			BreadcrumbManager.onDirectoryChange(mFile);
 		}
 	}
 }

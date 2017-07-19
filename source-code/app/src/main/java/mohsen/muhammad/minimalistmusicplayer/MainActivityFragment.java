@@ -35,6 +35,7 @@ import mohsen.muhammad.minimalistmusicplayer.util.Util;
 public class MainActivityFragment extends Fragment {
 
 	@BindView(R.id.imageButtonBack) ImageButton mImageButtonBack;
+
 	@BindView(R.id.recyclerViewBreadcrumbs) RecyclerView mRecyclerViewBreadcrumbs;
 	@BindView(R.id.recyclerViewExplorer) RecyclerView mRecyclerViewExplorer;
 
@@ -124,8 +125,8 @@ public class MainActivityFragment extends Fragment {
 
 				// repopulate the recycler views
 				// the null checks are useless, but they'll never hurt!
-				ExplorerManager.update(Util.getCurrentDirectory());
-				BreadcrumbManager.update(Util.getCurrentDirectory());
+				ExplorerManager.onDirectoryChange(Util.getCurrentDirectory());
+				BreadcrumbManager.onDirectoryChange(Util.getCurrentDirectory());
 			}
 		});
 

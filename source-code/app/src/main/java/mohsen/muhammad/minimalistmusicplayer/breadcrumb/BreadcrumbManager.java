@@ -54,7 +54,7 @@ public class BreadcrumbManager {
 		sImageButtonBack = null;
 	}
 
-	public static void update(File currentDirectory) {
+	public static void onDirectoryChange(File currentDirectory) {
 		// if the class is not initialized, return
 		if (sRecyclerViewBreadcrumbs == null)
 			return;

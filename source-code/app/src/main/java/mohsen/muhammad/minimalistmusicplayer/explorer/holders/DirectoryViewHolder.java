@@ -60,8 +60,8 @@ public class DirectoryViewHolder extends ExplorerViewHolder {
 			Util.setCurrentDirectory(f);
 
 			// repopulate the recycler views
-			ExplorerManager.update(f);
-			BreadcrumbManager.update(f);
+			ExplorerManager.onDirectoryChange(f);
+			BreadcrumbManager.onDirectoryChange(f);
 		}
 	}
 }
