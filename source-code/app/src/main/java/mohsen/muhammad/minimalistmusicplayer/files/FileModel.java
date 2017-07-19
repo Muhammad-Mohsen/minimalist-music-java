@@ -4,10 +4,13 @@ import android.support.annotation.NonNull;
 
 import java.io.File;
 
+import mohsen.muhammad.minimalistmusicplayer.explorer.holders.TrackViewHolder;
+
 /**
  * Created by muhammad.mohsen on 4/15/2017.
- * holds a file's metadata.
- * metadata is obtained asynchronously via the MetadataAsyncTask
+ * Holds a file's metadata.
+ * Offers no distinction between a music file and a directory...just like java
+ * Metadata is obtained asynchronously via the MetadataAsyncTask
  */
 
 public class FileModel extends File {
@@ -19,6 +22,8 @@ public class FileModel extends File {
 
 	public int trackCount;
 
+	public TrackViewHolder.SelectionState selectionState;
+
 	public FileModel(@NonNull String pathname) {
 		super(pathname);
 		name = getName();
@@ -28,5 +33,7 @@ public class FileModel extends File {
 		duration = "";
 
 		trackCount = -1;
+
+		selectionState = TrackViewHolder.SelectionState.NONE;
 	}
 }

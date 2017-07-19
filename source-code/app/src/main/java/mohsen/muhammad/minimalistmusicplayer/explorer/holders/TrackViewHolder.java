@@ -13,7 +13,7 @@ import mohsen.muhammad.minimalistmusicplayer.files.FileModel;
  * Created by muhammad.mohsen on 12/10/2016.
  * TRACK ViewHolder class for the Explorer RecyclerView
  */
-	public class TrackViewHolder extends ExplorerViewHolder {
+public class TrackViewHolder extends ExplorerViewHolder {
 
 	@BindView(R.id.textViewTrackTitle) TextView mTextViewTrackTitle;
 	@BindView(R.id.textViewTrackAlbumArtist) TextView mTextViewTrackAlbumArtist;
@@ -39,6 +39,8 @@ import mohsen.muhammad.minimalistmusicplayer.files.FileModel;
 			trackAlbumArtist = getContext().getResources().getString(R.string.loading_metadata);
 
 		mTextViewTrackAlbumArtist.setText(trackAlbumArtist);
+
+		// TODO update state icon
 	}
 
 	@Override
@@ -51,9 +53,32 @@ import mohsen.muhammad.minimalistmusicplayer.files.FileModel;
 
 		@Override
 		public void onClick(View v) {
-			// play the track
+			// TODO PlaybackManager should take it from here :)
+			// check whether select mode is active, to know what to do next
+			// update the state
 
-			// select the track
+			getFileModel().selectionState = SelectionState.PLAYING;
 		}
+	}
+
+	private class TrackItemOnLongClickListener implements View.OnLongClickListener {
+
+		@Override
+		public boolean onLongClick(View view) {
+			// TODO enable select mode if it isn't already.
+			return false;
+		}
+	}
+
+	// TODO get the selection state from the icon drawable, if possible
+	private SelectionState getCurrentSelectionState() {
+		return SelectionState.NONE;
+	}
+
+	public enum SelectionState {
+		NONE,
+		SELECTED,
+		PLAYLIST,
+		PLAYING
 	}
 }
