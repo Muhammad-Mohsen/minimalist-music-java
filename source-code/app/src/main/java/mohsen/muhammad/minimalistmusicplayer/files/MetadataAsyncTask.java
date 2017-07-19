@@ -45,6 +45,6 @@ public class MetadataAsyncTask extends AsyncTask<ArrayList<FileModel>, Void, Arr
 
 		ExplorerRecyclerViewAdapter adapter = ExplorerManager.getExplorerAdapter();
 		if (adapter != null && isOnCurrentDirectory)
-			adapter.notifyItemRangeChanged(0, fileModels.size());
+			adapter.notifyDataSetChanged(); // until I implement an item animator, there won't be change animations!
 	}
 }
